@@ -1,12 +1,18 @@
 import React from 'react';
+import '@testing-library/jest-dom';
+
 import { shallow } from "enzyme";
 import { AddCategory } from '../../components/AddCategory';
 
 describe('Pruebas en <AddCategory />', () => {
    
-    const setCategories = () => {};
-    const wrapper = shallow(<AddCategory setCategories={setCategories} />);
-
+    const setCategories = jest.fn();
+    let wrapper;
+    
+    beforeEach(() => {
+        jest.clearAllMocks();
+        wrapper = shallow(<AddCategory setCategories={setCategories} />);
+    });
 
     test('debe mostrarse correctamente', () => {
 
@@ -25,7 +31,14 @@ describe('Pruebas en <AddCategory />', () => {
 
     }); 
     
+    test('NO debe postear la información con submit', () => {
+        wrapper.find('form').simulate('submit', { preventDefault(){} });
+        
+        // Comprobamos que no se llama al método setCategories al hacer submit
+        expect(setCategories ).not.toHaveBeenCalled();
 
+    });
+    
 
 });
 
