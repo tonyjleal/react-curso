@@ -1,6 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Padre } from './components/07-tarea-memo/Padre';
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+// import { Padre } from './components/07-tarea-memo/Padre';
 // import CounterApp from './components/01-useState/CounterApp';
 // import { CounterWithCustomHook } from './components/01-useState/CounterWithCustomHook';
 // import { SimpleForm } from './components/02-useEffect/SimpleForm';
@@ -14,7 +14,8 @@ import { Padre } from './components/07-tarea-memo/Padre';
 // import { MemoHook } from './components/06-memos/MemoHook';
 // import { Memorize } from './components/06-memos/Memorize';
 
-ReactDOM.render(
-    <Padre />,
-  document.getElementById('root')
-);
+// ReactDOM.render(
+//     <Padre />,
+//   document.getElementById('root')
+// );
+import './components/08-useReducer/intro-reducer';
