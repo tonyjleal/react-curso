@@ -2,17 +2,38 @@ import React, { useReducer } from 'react';
 import './style.css';
 import { todoReducer } from './todoReducer';
 
-const initialState = [{
-  id: new Date().getTime(),
-  desc: 'Aprender React', 
-  done: false
-}];
-
 
 export const TodoApp = () => {
 
-  
- const [ todos ]  = useReducer(todoReducer, initialState);
+ const init = () => {
+  return [{
+    id: new Date().getTime(),
+    desc: 'Aprender React', 
+    done: false
+  }];
+ }
+ 
+ const [ todos, dispatch ]  = useReducer(todoReducer, [], init);
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newTodo = {
+      id: new Date().getTime(),
+      desc: 'New Task',
+      done: false
+    }
+    
+    const action = {
+      type: 'add',
+      payload: newTodo
+    }
+
+    dispatch(action);
+
+  }
+
 
   return(
      <div>
@@ -41,7 +62,7 @@ export const TodoApp = () => {
             <h4>Agregar TODO</h4>
             <hr />
 
-            <form>
+            <form onSubmit={handleSubmit}>
               <input 
               className='form-control'
               type="text" 
@@ -49,7 +70,7 @@ export const TodoApp = () => {
               placeholder='Aprender...'
               autoComplete='off' />
 
-              <button type='button' className='btn btn-outline-primary col-12 mt-1'>
+              <button type='submit' className='btn btn-outline-primary col-12 mt-1'>
                 Agregar
               </button>
             </form>
