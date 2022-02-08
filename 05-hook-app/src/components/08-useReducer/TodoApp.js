@@ -1,27 +1,36 @@
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
+import { useForm } from '../../hooks/useForm';
 import './style.css';
 import { todoReducer } from './todoReducer';
 
 
+const init = () => {
+   return JSON.parse(localStorage.getItem('todos')) || [];
+}
+
 export const TodoApp = () => {
 
- const init = () => {
-  return [{
-    id: new Date().getTime(),
-    desc: 'Aprender React', 
-    done: false
-  }];
- }
- 
  const [ todos, dispatch ]  = useReducer(todoReducer, [], init);
+ 
+ const [{description}, handleInputChange, reset] = useForm({
+    description: ''
+ });
 
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
+  
 
-  const handleSubmit = (e) => {
+ const handleSubmit = (e) => {
+   
     e.preventDefault();
+
+    if (description.trim().length == 0)
+      return;
 
     const newTodo = {
       id: new Date().getTime(),
-      desc: 'New Task',
+      desc: description,
       done: false
     }
     
@@ -31,7 +40,7 @@ export const TodoApp = () => {
     }
 
     dispatch(action);
-
+    reset();
   }
 
 
@@ -68,9 +77,13 @@ export const TodoApp = () => {
               type="text" 
               name="description"
               placeholder='Aprender...'
-              autoComplete='off' />
+              autoComplete='off' 
+              value={description}
+              onChange={handleInputChange}/>
 
-              <button type='submit' className='btn btn-outline-primary col-12 mt-1'>
+              <button 
+                type='submit' 
+                className='btn btn-outline-primary col-12 mt-1'>
                 Agregar
               </button>
             </form>
