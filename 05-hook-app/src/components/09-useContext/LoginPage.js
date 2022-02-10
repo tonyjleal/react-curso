@@ -1,8 +1,9 @@
 import React from 'react';
 
 export const LoginPage = () => {
-    return <div>
-        <h1>Again Page</h1>
-        <hr />
-    </div>;
+    return (
+        <div>
+            <h1>Login Page</h1>
+            <hr />
+        </div>);
 };
