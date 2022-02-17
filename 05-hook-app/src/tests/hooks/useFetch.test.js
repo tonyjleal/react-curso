@@ -4,7 +4,7 @@ import { useFetch } from "../../hooks/useFetch"
 
 describe('Test useFetch', () => { 
 
-
+   
     test('should return state default', () => { 
         
         const {result} = renderHook( () => useFetch(`https://www.breakingbadapi.com/api/quotes/1`))
@@ -20,7 +20,7 @@ describe('Test useFetch', () => {
      test('should have valid info', async() => { 
         
         const {result, waitForNextUpdate} = renderHook( () => useFetch('https://www.breakingbadapi.com/api/quotes/1'))
-        await waitForNextUpdate();
+        await waitForNextUpdate({timeout:2000});
 
 
         const { data, loading, error } = result.current;

@@ -31,8 +31,6 @@ describe('Test component <TodoList />', () => {
     test('should have handleDelete function', () => { 
           
         const functionDelete = wrapper.find('TodoListItem').at(0).prop('handleDelete');
-        
-        console.log(functionDelete)
 
         expect(functionDelete).toEqual(expect.any(Function))
 
